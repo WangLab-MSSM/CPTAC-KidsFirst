@@ -438,7 +438,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag"><span class="hero-dot"></span>Active Research · NCI CPTAC &amp; NIH Kids First</div>
+  <div class="hero-tag"><span class="hero-dot"></span>Active Research · NCI-CPTAC &amp; Kids First</div>
   <h1>Open code for<br><span>CPTAC - Kids First</span><br>pediatric brain tumor proteogenomics study</h1>
   <p class="hero-sub">
     Reproducible analysis pipelines, harmonized multi-omic workflows, and shared tooling for the CPTAC–Kids First collaborative brain tumor project. All code is version-controlled and peer-reviewed.
@@ -456,7 +456,7 @@
 <div class="stats">
   <div class="stats-inner">
     <div class="stat">
-      <span class="stat-val">7</span>
+      <span class="stat-val">9</span>
       <span class="stat-label">Cancer Histologies</span>
     </div>
     <div class="stat">
@@ -491,7 +491,7 @@
     <a class="repo-card" href="#">
       <div class="repo-name">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-        cptac-kf-data-preprocessing
+        KF-data-preprocessing
       </div>
       <div class="badge badge-pipeline">pipeline</div>
       <p class="repo-desc">Preprocess and Harmonize CPTAC - Kids First clinical and multiomics data into a unified schema.</p>
@@ -517,7 +517,7 @@
     <a class="repo-card" href="#">
       <div class="repo-name">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-        kinase/TF enrichment analysis
+        kinase/TF-enrichment-analysis
       </div>
       <div class="badge badge-intermediate">intermediate output</div>
       <p class="repo-desc">Estimate kinase/TF activities from phosphoproteomics/transcriptomics data using KEA3/ChEA3 methods.</p>
@@ -556,7 +556,7 @@
     <a class="repo-card" href="#">
       <div class="repo-name">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-        kf-brain-explorer
+        KF-data-explorer
       </div>
       <div class="badge badge-viz">visualization</div>
       <p class="repo-desc">proTrak a web portal for visulization and interactive exploration of clinical/multiomics data.</p>
@@ -569,7 +569,7 @@
     <a class="repo-card" href="#">
       <div class="repo-name">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-        cptac-kf-notebooks
+        KF-notebooks
       </div>
       <div class="badge badge-viz">notebooks</div>
       <p class="repo-desc">Curated Jupyter notebooks reproducing key figures and supplemental analyses from published papers.</p>
@@ -592,33 +592,33 @@
   <div class="pipeline-grid">
     <div class="pipe-step">
       <div class="pipe-num">01</div>
-      <div class="pipe-title">Data ingestion</div>
-      <p class="pipe-desc">Pull harmonized clinical and omics data from CPTAC Data Portal and Kids First DRC via APIs.</p>
+      <div class="pipe-title">Data Aquisition</div>
+      <p class="pipe-desc">clinical and multiomics data generation from raw output.</p>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">02</div>
-      <div class="pipe-title">Quality control</div>
-      <p class="pipe-desc">Sample-level QC, batch detection, and outlier flagging across genomic and proteomic layers.</p>
+      <div class="pipe-title">Preprocessing and QC</div>
+      <p class="pipe-desc">batch effect correction, outlier flagging, missing data imputation, identifying multiomics mismatching.</p>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">03</div>
-      <div class="pipe-title">Normalization</div>
-      <p class="pipe-desc">TMT normalization (proteomics), ComBat-seq (RNA), and beta-mixture (methylation).</p>
+      <div class="pipe-title">Pan histology data harmonization</div>
+      <p class="pipe-desc">proteomics data harmonization across </p>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">04</div>
-      <div class="pipe-title">Integration</div>
-      <p class="pipe-desc">MOFA+ and weighted correlation network analysis across all omic modalities.</p>
+      <div class="pipe-title">Intermediate output</div>
+      <p class="pipe-desc">cell tyoe deconvolution, kinase/TF activity, rna splicing events...</p>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">05</div>
-      <div class="pipe-title">Subtype discovery</div>
-      <p class="pipe-desc">Consensus clustering and proteogenomic subtype assignment with clinical validation.</p>
+      <div class="pipe-title">Multi omics integrative analysis </div>
+      <p class="pipe-desc">clustering, cis/trans regulation analysis, survival association...</p>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">06</div>
-      <div class="pipe-title">Reproducibility</div>
-      <p class="pipe-desc">Containerized execution via Docker/Singularity; all outputs are versioned and archived.</p>
+      <div class="pipe-title">Data and Analysis visualization</div>
+      <p class="pipe-desc">proTrak, cBioPortal,...</p>
     </div>
   </div>
 </section>
