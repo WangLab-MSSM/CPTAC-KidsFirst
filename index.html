@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CPTAC · Kids First Brain Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0D1B2A;
+      --navy2:  #142030;
+      --teal:   #1D9CB5;
+      --teal-l: #4FC3D9;
+      --sage:   #6BAA9F;
+      --ice:    #BDE0F5;
+      --white:  #F7FBFF;
+      --mid:    #6E8898;
+      --border: rgba(189,224,245,.15);
+      --card:   rgba(255,255,255,.04);
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --navy:   #F0F7FF;
+        --navy2:  #E2EFF9;
+        --teal:   #0E7A91;
+        --teal-l: #1D9CB5;
+        --sage:   #4D8A80;
+        --ice:    #0A3D55;
+        --white:  #0D1B2A;
+        --mid:    #3D6070;
+        --border: rgba(13,27,42,.12);
+        --card:   rgba(13,27,42,.04);
+      }
+    }
+    *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+    html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 50;
+      background: var(--navy);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+    }
+    .nav-logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--teal), var(--sage));
+      border-radius: 6px;
+      display: grid; place-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem;
+      color: #fff;
+      letter-spacing: -.02em;
+      font-weight: 500;
+    }
+    .nav-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem;
+      font-weight: 400;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--teal-l); }
+    .nav-gh {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: .4rem .85rem;
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      transition: border-color .15s;
+    }
+    .nav-gh:hover { border-color: var(--teal); }
+    .nav-gh svg { opacity: .7; }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem;
+      color: var(--teal);
+      background: rgba(29,156,181,.1);
+      border: 1px solid rgba(29,156,181,.25);
+      border-radius: 4px;
+      padding: .3rem .7rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    h1 span { color: var(--teal-l); }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--mid);
+      max-width: 60ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      padding: .65rem 1.4rem;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .9rem;
+      transition: background .15s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-primary:hover { background: var(--teal-l); }
+    .btn-secondary {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: .65rem 1.4rem;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: .9rem;
+      transition: border-color .15s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-secondary:hover { border-color: var(--teal); }
+
+    /* STATS STRIP */
+    .stats {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--navy2);
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; gap: .15rem; }
+    .stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ice);
+    }
+    .stat-label { font-size: .78rem; color: var(--mid); }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: -.02em;
+    }
+    .see-all {
+      font-size: .8rem;
+      color: var(--teal);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .see-all:hover { text-decoration: underline; }
+
+    /* REPO CARDS */
+    .repos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .repo-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.3rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: border-color .15s, background .15s;
+    }
+    .repo-card:hover { border-color: var(--teal); background: rgba(29,156,181,.05); }
+    .repo-name {
+      font-family: 'DM Mono', monospace;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--teal-l);
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .repo-desc { font-size: .83rem; color: var(--mid); line-height: 1.5; flex: 1; }
+    .repo-meta { display: flex; gap: 1rem; align-items: center; }
+    .repo-lang {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .75rem; color: var(--mid);
+    }
+    .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .repo-stars { font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--mid); }
+    .badge {
+      font-size: .65rem;
+      font-family: 'DM Mono', monospace;
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .badge-pipeline { border-color: rgba(107,170,159,.4); color: var(--sage); }
+    .badge-analysis { border-color: rgba(29,156,181,.4); color: var(--teal-l); }
+    .badge-viz      { border-color: rgba(189,224,245,.3); color: var(--ice); }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* PIPELINE */
+    .pipeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+    .pipe-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+    }
+    .pipe-num {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem;
+      color: var(--teal);
+      margin-bottom: .4rem;
+    }
+    .pipe-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+    .pipe-desc { font-size: .78rem; color: var(--mid); line-height: 1.5; }
+
+    /* TEAM */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .85rem; }
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color .15s;
+    }
+    .team-card:hover { border-color: var(--sage); }
+    .team-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--sage));
+      display: grid; place-items: center;
+      margin: 0 auto .6rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .team-name { font-size: .85rem; font-weight: 500; color: var(--white); }
+    .team-role { font-size: .75rem; color: var(--mid); margin-top: .15rem; }
+    .team-inst { font-size: .7rem; color: var(--sage); margin-top: .1rem; }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: .85rem; }
+    .pub {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem;
+      color: var(--teal);
+      padding-top: .15rem;
+      white-space: nowrap;
+    }
+    .pub-body { flex: 1; }
+    .pub-title { font-size: .88rem; font-weight: 500; color: var(--white); margin-bottom: .25rem; line-height: 1.45; }
+    .pub-authors { font-size: .78rem; color: var(--mid); }
+    .pub-journal { font-size: .78rem; color: var(--sage); font-style: italic; }
+    .pub-link {
+      font-size: .75rem;
+      color: var(--teal-l);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: .3rem;
+      margin-top: .35rem;
+    }
+    .pub-link:hover { text-decoration: underline; }
+
+    /* CONTRIBUTE */
+    .contribute-box {
+      background: linear-gradient(135deg, rgba(29,156,181,.12), rgba(107,170,159,.08));
+      border: 1px solid rgba(29,156,181,.25);
+      border-radius: 12px;
+      padding: 2.5rem;
+    }
+    .contribute-box h2 { margin-bottom: .6rem; }
+    .contribute-box p { color: var(--mid); font-size: .9rem; max-width: 55ch; margin-bottom: 1.5rem; line-height: 1.7; }
+    .steps { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.8rem; }
+    .step { display: flex; gap: .75rem; align-items: flex-start; }
+    .step-icon {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(29,156,181,.2);
+      border: 1px solid rgba(29,156,181,.35);
+      display: grid; place-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem;
+      color: var(--teal-l);
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .step-text { font-size: .85rem; color: var(--mid); }
+    .step-text strong { color: var(--white); }
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: .82rem;
+      background: rgba(29,156,181,.12);
+      border: 1px solid rgba(29,156,181,.2);
+      padding: .15rem .4rem;
+      border-radius: 4px;
+      color: var(--teal-l);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--navy2);
+    }
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-left { font-size: .8rem; color: var(--mid); }
+    .footer-left strong { color: var(--white); }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: .8rem; color: var(--mid); text-decoration: none; }
+    .footer-links a:hover { color: var(--teal-l); }
+
+    @media (max-width: 600px) {
+      nav { padding: .75rem 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 3rem 1rem 2.5rem; }
+      section { padding: 2.5rem 1rem; }
+      .stats-inner { gap: 1.5rem; padding: 1.25rem 1rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">KF<br>CPTAC</div>
+    <span class="nav-title">CPTAC · Kids First Brain</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#repositories">Code</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#contribute">Contribute</a></li>
+  </ul>
+  <a class="nav-gh" href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst" target="_blank" rel="noopener">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+    GitHub
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag"><span class="hero-dot"></span>Active Research · NCI-CPTAC &amp; Kids First</div>
+  <h1>Open code for<br><span>CPTAC - Kids First</span><br>pediatric brain tumor proteogenomics study</h1>
+  <p class="hero-sub">
+    Reproducible analysis pipelines, harmonized multi-omic workflows, and shared tooling for the CPTAC–Kids First collaborative brain tumor project. All code is version-controlled.
+  </p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#repositories">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+      Browse repositories
+    </a>
+    <a class="btn-secondary" href="#contribute">Read the contributing guide</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-val">9</span>
+      <span class="stat-label">Cancer Histologies</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">445</span>
+      <span class="stat-label">Tumor samples</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">6</span>
+      <span class="stat-label">Omics layers</span>
+    </div>
+    <!-- <div class="stat">
+      <span class="stat-val">XX</span>
+      <span class="stat-label">Institutions</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">XX</span>
+      <span class="stat-label">Publications</span>
+    </div> -->
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- REPOSITORIES -->
+<section id="repositories">
+  <div class="section-head">
+    <h2>Repositories</h2>
+    <a class="see-all" href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst" target="_blank" rel="noopener">View all on GitHub →</a>
+  </div>
+  <div class="repos">
+
+    <a class="repo-card" href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        KF-data-preprocessing
+      </div>
+      <div class="badge badge-pipeline">pipeline</div>
+      <p class="repo-desc">Preprocess and Harmonize CPTAC - Kids First clinical and multiomics data into a unified schema.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>R</span>
+        <span class="repo-stars">★ 34</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        cell-type-deconvolution
+      </div>
+      <div class="badge badge-intermediate">intermediate output</div>
+      <p class="repo-desc">Deconvolute cell type fractions integrating proteomics and transcriptomics data with BayesDeBulk.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#198CE7"></span>R</span>
+        <span class="repo-stars">★ 21</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        kinase/TF-enrichment-analysis
+      </div>
+      <div class="badge badge-intermediate">intermediate output</div>
+      <p class="repo-desc">Estimate kinase/TF activities from phosphoproteomics/transcriptomics data using KEA3/ChEA3 methods.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#198CE7"></span>R/python/java</span>
+        <span class="repo-stars">★ 21</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        multi-omic-regulation
+      </div>
+      <div class="badge badge-analysis">analysis</div>
+      <p class="repo-desc">Multi-omic cis/trans analysis assessing impact of DNA alterations on other omics layers using iProFun/iProPath methods.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#276DC2"></span>R</span>
+        <span class="repo-stars">★ 47</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        survival-modeling
+      </div>
+      <div class="badge badge-analysis">analysis</div>
+      <p class="repo-desc">Cox proportional hazard regression, and Kaplan–Meier analyses to estimate the survival association with clinical/omics data.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#276DC2"></span>R</span>
+        <span class="repo-stars">★ 18</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        KF-data-explorer
+      </div>
+      <div class="badge badge-viz">visualization</div>
+      <p class="repo-desc">proTrak a web portal for visulization and interactive exploration of clinical/multiomics data.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#276DC2"></span> XXX </span>
+        <span class="repo-stars">★ 29</span>
+      </div>
+    </a>
+
+    <a class="repo-card" href="#">
+      <div class="repo-name">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        KF-notebooks
+      </div>
+      <div class="badge badge-viz">notebooks</div>
+      <p class="repo-desc">Curated Jupyter notebooks reproducing key figures and supplemental analyses from published papers.</p>
+      <div class="repo-meta">
+        <span class="repo-lang"><span class="lang-dot" style="background:#F37726"></span>Jupyter</span>
+        <span class="repo-stars">★ 62</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PIPELINE -->
+<section id="pipeline">
+  <div class="section-head">
+    <h2>Analysis pipeline overview</h2>
+  </div>
+  <div class="pipeline-grid">
+    <div class="pipe-step">
+      <div class="pipe-num">01</div>
+      <div class="pipe-title">Data Aquisition</div>
+      <p class="pipe-desc">clinical and multiomics data generation from raw output.</p>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">02</div>
+      <div class="pipe-title">Preprocessing and QC</div>
+      <p class="pipe-desc">batch effect correction, outlier flagging, missing data imputation, identifying multiomics mismatching.</p>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">03</div>
+      <div class="pipe-title">Pan histology data harmonization</div>
+      <p class="pipe-desc">proteomics data harmonization across </p>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">04</div>
+      <div class="pipe-title">Intermediate output</div>
+      <p class="pipe-desc">cell tyoe deconvolution, kinase/TF activity, rna splicing events...</p>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">05</div>
+      <div class="pipe-title">Multi omics integrative analysis </div>
+      <p class="pipe-desc">clustering, cis/trans regulation analysis, survival association...</p>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">06</div>
+      <div class="pipe-title">Data and Analysis visualization</div>
+      <p class="pipe-desc">proTrak, cBioPortal,...</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-head">
+    <h2>Contributors</h2>
+    <a class="see-all" href="#">Full list →</a>
+  </div>
+  <div class="team-grid">
+    <a class="team-card" href="#">
+      <div class="team-avatar">AB</div>
+      <div class="team-name">AAA BBB</div>
+      <div class="team-role">Title</div>
+      <div class="team-inst">Institute</div>
+    </a>
+    <a class="team-card" href="#">
+      <div class="team-avatar">AB</div>
+      <div class="team-name">AAA BBB</div>
+      <div class="team-role">Title</div>
+      <div class="team-inst">Institute</div>
+    </a>
+    <a class="team-card" href="#">
+      <div class="team-avatar">AB</div>
+      <div class="team-name">AAA BBB</div>
+      <div class="team-role">Title</div>
+      <div class="team-inst">Institute</div>
+    </a>
+    <a class="team-card" href="#">
+      <div class="team-avatar">AB</div>
+      <div class="team-name">AAA BBB</div>
+      <div class="team-role">Title</div>
+      <div class="team-inst">Institute</div>
+    </a>
+    <a class="team-card" href="#">
+      <div class="team-avatar">+</div>
+      <div class="team-name">Add yourself</div>
+      <div class="team-role">Open contribution</div>
+      <div class="team-inst">Your institution</div>
+    </a>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-head">
+    <h2>Publications</h2>
+  </div>
+  <div class="pub-list">
+    <div class="pub">
+      <div class="pub-year">2027</div>
+      <div class="pub-body">
+        <div class="pub-title">title1</div>
+        <div class="pub-authors">(Authors list) XXX, et al. — <span class="pub-journal">journal name</span></div>
+        <a class="pub-link" href="#">DOI: 10.xxxx/xxxx.xxx.xxxxx →</a>
+      </div>
+    </div>
+    <div class="pub">
+      <div class="pub-year">2027</div>
+      <div class="pub-body">
+        <div class="pub-title">title2</div>
+        <div class="pub-authors">(Authors list) XXX, et al. — <span class="pub-journal">journal name</span></div>
+        <a class="pub-link" href="#">DOI: 10.xxxx/xxxx.xxx.xxxxx →</a>
+      </div>
+    </div>
+    <div class="pub">
+      <div class="pub-year">2027</div>
+      <div class="pub-body">
+        <div class="pub-title">title3</div>
+        <div class="pub-authors">(Authors list) XXX, et al. — <span class="pub-journal">journal name</span></div>
+        <a class="pub-link" href="#">DOI: 10.xxxx/xxxx.xxx.xxxxx →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTRIBUTE -->
+<section id="contribute">
+  <div class="contribute-box">
+    <h2>Contribute to this project</h2>
+    <p>We welcome contributions from the broader pediatric cancer research community — new pipelines, bug fixes, notebook improvements, or documentation. All code is reviewed by a project maintainer before merging.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">1</div>
+        <div class="step-text"><strong>Fork and clone</strong> — <code>git clone https://github.com/WangLab-MSSM/CPTAC-KidsFirst</code></div>
+      </div>
+      <div class="step">
+        <div class="step-icon">2</div>
+        <div class="step-text"><strong>Branch from <code>dev</code></strong> — <code>git checkout -b feature/your-feature</code></div>
+      </div>
+      <div class="step">
+        <div class="step-icon">3</div>
+        <div class="step-text"><strong>Follow the style guide</strong> — PEP 8 for Python, tidyverse conventions for R; document with docstrings.</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">4</div>
+        <div class="step-text"><strong>Open a pull request</strong> — link the relevant issue and tag at least one reviewer from the maintainers list.</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">5</div>
+        <div class="step-text"><strong>Add data access notes</strong> — if your code needs protected data, document dbGaP accession numbers and consent requirements.</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Read CONTRIBUTING.md</a>
+      <a class="btn-secondary" href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst/issues" target="_blank" rel="noopener">Open an issue</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>CPTAC · Kids First Brain Project</strong><br>
+      Funded by NCI CPTAC and NIH Gabriella Miller Kids First Program. Data access via dbGaP.
+    </div>
+    <div class="footer-links">
+      <a href="https://proteomics.cancer.gov/programs/cptac" target="_blank" rel="noopener">CPTAC</a>
+      <a href="https://kidsfirstdrc.org" target="_blank" rel="noopener">Kids First DRC</a>
+      <a href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener">Code of Conduct</a>
+      <a href="https://github.com/WangLab-MSSM/CPTAC-KidsFirst/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
